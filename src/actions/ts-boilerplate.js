@@ -14,7 +14,7 @@ const initTsBoilerplate = async ({ path: initPath }) => {
   const git = simpleGit(initPath);
 
   try {
-    await git.clone(TS_REPO_URL);
+    await git.clone(TS_REPO_URL, initPath);
   } catch (e) {
     console.log(e.message);
     process.exit(1);
