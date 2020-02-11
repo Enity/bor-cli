@@ -1,0 +1,17 @@
+env:
+  es6: true
+  node: true
+extends: airbnb-base
+parserOptions:
+  ecmaVersion: 9
+  sourceType: module
+rules:
+  'no-console': off
+  'import/prefer-default-export': off
+  'camelcase': off
+  'no-multi-spaces': ["error", { ignoreEOLComments: true }]
+  'implicit-arrow-linebreak': off
+  'no-unused-vars': warn
+  'no-restricted-syntax': off
+  'no-param-reassign': off
+  'class-methods-use-this': off
