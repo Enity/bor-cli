@@ -14,7 +14,7 @@ const askAction = () => inquirer.prompt([{
 const askProjectName = () => inquirer.prompt([{
   name: 'dirname',
   type: 'input',
-  message: 'Enter new project folder name. Or \'.\' for current directory',
+  message: 'Enter new project folder name. Empty for current directory',
 }]);
 
 module.exports = {
