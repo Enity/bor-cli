@@ -17,7 +17,19 @@ const askProjectName = () => inquirer.prompt([{
   message: 'Enter new project folder name. Empty for current directory',
 }]);
 
+const askTsBoilerplateOptions = () => inquirer.prompt([{
+  name: 'options',
+  type: 'checkbox',
+  message: 'Select options',
+  choices: [
+    { name: 'Dockerfile', value: 'docker', checked: true },
+    { name: 'Gitlab Ci config', value: 'gitlab', checked: true },
+    { name: 'Install dependencies', value: 'npmi' },
+  ],
+}]);
+
 module.exports = {
   askAction,
   askProjectName,
+  askTsBoilerplateOptions,
 };

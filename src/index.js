@@ -3,7 +3,7 @@ const path = require('path');
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const { askAction, askProjectName } = require('./ui');
+const { askAction, askProjectName, askTsBoilerplateOptions } = require('./ui');
 const { ACTION_TYPE } = require('./constants');
 const { initTsBoilerplate } = require('./actions/ts-boilerplate');
 
@@ -17,8 +17,15 @@ const main = async () => {
 
   if (action === ACTION_TYPE.INIT_TS_BOILERPLATE) {
     const { dirname } = await askProjectName();
+    const { options } = await askTsBoilerplateOptions();
     const fullPath = path.resolve(currentPath, dirname);
-    await initTsBoilerplate({ path: fullPath });
+    await initTsBoilerplate({
+      path: fullPath,
+      ...options.reduce((accum, op) => {
+        accum[op] = true;
+        return accum;
+      }, {}),
+    });
   } else {
     process.exit(0);
   }
