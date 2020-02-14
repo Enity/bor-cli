@@ -25,10 +25,14 @@ const initTsBoilerplate = async ({
     process.exit(1);
   }
 
-  progress.message('Git...');
-  const gitDir = path.join(initPath, '.git');
-  await fs.remove(gitDir);
-  await git.init();
+  progress.message('Change names...');
+  const projectName = path.basename(initPath);
+  const packageJsonPath = path.join(initPath, 'package.json');
+  const packageJson = await fs.readFile(packageJsonPath, 'utf-8');
+  const parsedPackage = JSON.parse(packageJson);
+  parsedPackage.name = projectName;
+  parsedPackage.description = `${projectName} project`;
+  await fs.writeFile(packageJsonPath, JSON.stringify(parsedPackage, null, 2));
 
   progress.message('Clean...');
   if (!docker) {
@@ -43,6 +47,11 @@ const initTsBoilerplate = async ({
     progress.message('Installing dependencies...');
     await exec('npm ci', { cwd: initPath });
   }
+
+  progress.message('Git...');
+  const gitDir = path.join(initPath, '.git');
+  await fs.remove(gitDir);
+  await git.init();
 
   progress.stop();
   console.log('Enjoy!');
