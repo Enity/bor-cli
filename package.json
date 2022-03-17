@@ -23,7 +23,7 @@
     "figlet": "^1.2.4",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.4",
-    "simple-git": "^1.131.0"
+    "simple-git": "^3.3.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
